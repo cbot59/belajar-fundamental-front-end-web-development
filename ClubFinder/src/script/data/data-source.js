@@ -6,10 +6,10 @@ class DataSource {
             });
 
             if (filteredClubs.length) {
-                this.onSuccess(filteredClubs);
+                resolve(filteredClubs);
             }
             else {
-                this.onFailed(`${keyword} is not found`);
+                reject(`${keyword} is not found`);
             }
         });
     }
