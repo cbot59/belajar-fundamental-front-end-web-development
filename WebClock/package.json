@@ -1,0 +1,19 @@
+{
+  "name": "webclock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cbot59/belajar-fundamental-front-end-web-development.git"
+  },
+  "author": "Rivaldi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cbot59/belajar-fundamental-front-end-web-development/issues"
+  },
+  "homepage": "https://github.com/cbot59/belajar-fundamental-front-end-web-development#readme"
+}
