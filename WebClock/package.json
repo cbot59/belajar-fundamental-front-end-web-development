@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/cbot59/belajar-fundamental-front-end-web-development/issues"
   },
-  "homepage": "https://github.com/cbot59/belajar-fundamental-front-end-web-development#readme"
+  "homepage": "https://github.com/cbot59/belajar-fundamental-front-end-web-development#readme",
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "moment": "^2.27.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  }
 }
