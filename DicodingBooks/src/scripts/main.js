@@ -1,7 +1,24 @@
 function main() {
 
     const getBook = () => {
-        // tuliskan kode di sini!
+        const xhr = new XMLHttpRequest();
+
+        xhr.onload = function () {
+            const responseJson = JSON.parse(this.responseText);
+
+            if (responseJson.error) {
+                showResponseMessage(responseJson.message);
+            } else {
+                renderAllBooks(responseJson.books);
+            }
+        }
+
+        xhr.onerror = function () {
+            showResponseMessage();
+        }
+
+        xhr.open('GET', 'https://web-server-book-dicoding.appspot.com/list');
+        xhr.send();
     };
 
 
