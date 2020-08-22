@@ -1,5 +1,7 @@
 function main() {
 
+    const baseURL = 'https://web-server-book-dicoding.appspot.com';
+
     const getBook = () => {
         const xhr = new XMLHttpRequest();
 
@@ -17,13 +19,28 @@ function main() {
             showResponseMessage();
         }
 
-        xhr.open('GET', 'https://web-server-book-dicoding.appspot.com/list');
+        xhr.open('GET', `${baseURL}/list`);
         xhr.send();
     };
 
 
     const insertBook = (book) => {
-        // tuliskan kode di sini!
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', `${baseURL}/add`);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-Auth-Token', '12345');
+
+        xhr.onload = function () {
+            const responseJson = JSON.parse(this.responseText);
+            showResponseMessage(responseJson.message);
+            getBook();
+        }
+
+        xhr.onerror = function () {
+            showResponseMessage();
+        }
+
+        xhr.send(JSON.stringify(book));
     };
 
     const updateBook = (book) => {
