@@ -30,27 +30,27 @@ function main() {
                 getBook();
             })
             .catch(error => {
-                showResponseMessage();
+                showResponseMessage(error);
             });
     };
 
     const updateBook = (book) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('PUT', `${baseURL}/edit/${book.id}`);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.setRequestHeader('X-Auth-Token', '12345');
-
-        xhr.onload = function () {
-            const responseJson = JSON.parse(this.responseText);
-            showResponseMessage(responseJson.message);
-            getBook();
-        }
-
-        xhr.onerror = function () {
-            showResponseMessage();
-        }
-
-        xhr.send(JSON.stringify(book));
+        fetch(`${baseURL}/edit/${book.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Auth-Token': '12345',
+            },
+            body: JSON.stringify(book),
+        })
+            .then(response => response.json())
+            .then(responseJson => {
+                showResponseMessage(responseJson.message);
+                getBook();
+            })
+            .catch(error => {
+                showResponseMessage(error);
+            });
     };
 
     const removeBook = (bookId) => {
