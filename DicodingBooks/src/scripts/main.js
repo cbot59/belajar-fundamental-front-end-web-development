@@ -16,22 +16,22 @@ function main() {
     };
 
     const insertBook = (book) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', `${baseURL}/add`);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.setRequestHeader('X-Auth-Token', '12345');
-
-        xhr.onload = function () {
-            const responseJson = JSON.parse(this.responseText);
-            showResponseMessage(responseJson.message);
-            getBook();
-        }
-
-        xhr.onerror = function () {
-            showResponseMessage();
-        }
-
-        xhr.send(JSON.stringify(book));
+        fetch(`${baseURL}/add`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Auth-Token': '12345',
+            },
+            body: JSON.stringify(book),
+        })
+            .then(response => response.json())
+            .then(responseJson => {
+                showResponseMessage(responseJson.message);
+                getBook();
+            })
+            .catch(error => {
+                showResponseMessage();
+            });
     };
 
     const updateBook = (book) => {
