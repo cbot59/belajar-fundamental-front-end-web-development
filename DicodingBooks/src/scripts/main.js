@@ -54,21 +54,18 @@ function main() {
     };
 
     const removeBook = (bookId) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('DELETE', `${baseURL}/delete/${bookId}`);
-        xhr.setRequestHeader('X-Auth-Token', '12345');
-
-        xhr.onload = function () {
-            const responseJson = JSON.parse(this.responseText);
-            showResponseMessage(responseJson.message);
-            getBook();
-        }
-
-        xhr.onerror = function () {
-            showResponseMessage();
-        }
-
-        xhr.send();
+        fetch(`${baseURL}/delete/${bookId}`, {
+            method: 'DELETE',
+            headers: {
+                'X-Auth-Token': '12345',
+            },
+        })
+            .then(response => response.json())
+            .then(responseJson => {
+                showResponseMessage(responseJson.message);
+                getBook();
+            })
+            .catch(error => showResponseMessage(error));
     };
 
 
