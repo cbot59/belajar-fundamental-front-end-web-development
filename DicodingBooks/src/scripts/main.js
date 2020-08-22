@@ -23,7 +23,6 @@ function main() {
         xhr.send();
     };
 
-
     const insertBook = (book) => {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', `${baseURL}/add`);
@@ -44,7 +43,22 @@ function main() {
     };
 
     const updateBook = (book) => {
-        // tuliskan kode di sini!
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', `${baseURL}/edit/${book.id}`);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-Auth-Token', '12345');
+
+        xhr.onload = function () {
+            const responseJson = JSON.parse(this.responseText);
+            showResponseMessage(responseJson.message);
+            getBook();
+        }
+
+        xhr.onerror = function () {
+            showResponseMessage();
+        }
+
+        xhr.send(JSON.stringify(book));
     };
 
     const removeBook = (bookId) => {
